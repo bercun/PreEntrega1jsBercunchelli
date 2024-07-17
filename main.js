@@ -2,10 +2,10 @@
 
 // iniciar variables
 
-let attemp = 0;
+let attemp = 0;  // intentos
 let win = 0;   
 let lose = 0;
-let draw = false;
+let draw = 0; // empate
 
 
 // funcion para que la comoputadora elija una opcion
@@ -31,8 +31,6 @@ function userChoise() {
 // funcion para iniciar la comprobacion del juego
 function gameRules(user, computer) {
     if (user === computer) {
-        
-        draw = true;
         return "Empate";
     }
     else if (user === "piedra" && computer === "tijera" || user === "papel" && computer === "piedra" || user === "tijera" && computer === "papel") {
@@ -44,7 +42,8 @@ function gameRules(user, computer) {
     }     
     
 }
-function gameStart() {
+
+function gameStart(){
     while (attemp < 3){
         let computer = compuChoise();
         let user = userChoise();
@@ -54,10 +53,12 @@ function gameStart() {
         console.log("El resultado es: " + result);
         if (result === "Ganaste") {
             win++;
-        } else if (result === "Perdiste") {
+        } 
+        else if (result === "Perdiste") {
             lose++;
-        } else {
-            draw = false;
+        } 
+        else {
+            draw++;
         }
         attemp++;
         console.log("Intentos: " + attemp);
@@ -69,10 +70,25 @@ function gameStart() {
         let playAgain = confirm("Quieres jugar de nuevo?");
         if (playAgain) {
             gameStart();
-        } else {
-        console.log("Gracias por jugar");
+        } 
+        else {
+            attemp = 0;
+            console.log("Gracias por jugar");
+            break;
+        }    
     }
+    if (attemp === 3) {
+        if (win > lose) {
+            console.log("Felicidades ganaste el juego");
+        }
+        else if (win < lose) {
+            console.log("Perdiste el juego");
+        }
+        else {
+            console.log("Empataste el juego");
+            console.log("Fin del juego");
+        }
     }
 }
 
-gameStart();
+gameStart()
