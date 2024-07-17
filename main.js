@@ -5,7 +5,7 @@
 let attemp = 0;
 let win = 0;   
 let lose = 0;
-let draw = true;
+let draw = false;
 
 
 // funcion para que la comoputadora elija una opcion
@@ -16,7 +16,7 @@ function compuChoise() {
     let computer = computerChoice[random];
     return computer;
 }
-// funcion para que el usuario elija una opcion
+//  funcion para que el usuario elija una opcion
 function userChoise() {
     let user = prompt("Elige: piedra, papel o tijera").toLowerCase();
     if (user === "piedra" || user === "papel" || user === "tijera") {
@@ -31,7 +31,9 @@ function userChoise() {
 // funcion para iniciar la comprobacion del juego
 function gameRules(user, computer) {
     if (user === computer) {
-    return "Empate";
+        
+        draw = true;
+        return "Empate";
     }
     else if (user === "piedra" && computer === "tijera" || user === "papel" && computer === "piedra" || user === "tijera" && computer === "papel") {
         return "Ganaste";
@@ -62,6 +64,8 @@ function gameStart() {
         console.log("Ganados: " + win);
         console.log("Perdidos: " + lose);
         console.log("Empates: " + draw);
+        
+        
         let playAgain = confirm("Quieres jugar de nuevo?");
         if (playAgain) {
             gameStart();
